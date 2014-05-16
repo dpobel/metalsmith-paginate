@@ -20,7 +20,8 @@ var pagination = function(opts) {
             num: 1,
             total: numPages,
             start: 0,
-            end: perPage - 1
+            end: perPage - 1,
+            files: collection.slice(0, perPage),
         };
 
         for (var i = 1; i < numPages; i++) {
@@ -32,10 +33,12 @@ var pagination = function(opts) {
             });
 
             last.pagination.next = clone;
+
             clone.pagination.prev = last;
             clone.pagination.start = i * perPage;
             clone.pagination.end = i * perPage + perPage - 1;
             clone.pagination.num = i+1;
+            clone.pagination.files = collection.slice(i * perPage, (i + 1) * perPage);
 
             files[cloneName] = clone;
 
