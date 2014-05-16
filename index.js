@@ -43,6 +43,7 @@ var pagination = function(opts) {
             clone.pagination.num = i+1;
             clone.pagination.files = collection.slice(i * perPage, (i + 1) * perPage);
             clone.pagination.pages = pages
+            delete clone.pagination.next
 
             files[cloneName] = clone;
             pages[clone.pagination.num.toString()] = clone;
