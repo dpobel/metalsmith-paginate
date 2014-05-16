@@ -14,6 +14,7 @@ var pagination = function(opts) {
             ext      = path.extname(fileName),
             baseName = filePath || fileName.substr(0, fileName.lastIndexOf(ext)),
             last     = file,
+            pages    = {"1": file},
             clone;
 
         file.pagination = {
@@ -41,8 +42,10 @@ var pagination = function(opts) {
             clone.pagination.end = i * perPage + perPage - 1;
             clone.pagination.num = i+1;
             clone.pagination.files = collection.slice(i * perPage, (i + 1) * perPage);
+            clone.pagination.pages = pages
 
             files[cloneName] = clone;
+            pages[clone.pagination.num.toString()] = clone;
 
             last = clone;
         }
