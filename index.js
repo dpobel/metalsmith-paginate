@@ -5,7 +5,8 @@ var cloneObj = require('lodash.clone'),
 
 var pagination = function(opts) {
     opts = opts || {};
-    var perPage = opts.perPage || 10;
+    var perPage = opts.perPage || 10,
+        separator = opts.pageSeparator || '-';
 
     var paginate = function(filePath, collection, fileName, files) {
         var numPages = Math.ceil(collection.length/perPage),
@@ -22,10 +23,11 @@ var pagination = function(opts) {
             start: 0,
             end: perPage - 1,
             files: collection.slice(0, perPage),
+            pages: pages,
         };
 
         for (var i = 1; i < numPages; i++) {
-            var cloneName = baseName + '-' + (i+1) + ext;
+            var cloneName = baseName + separator + (i+1) + ext;
             clone = cloneObj(file, true, function (value) {
                 if ( Buffer.isBuffer(value) ) {
                     return value.slice();
