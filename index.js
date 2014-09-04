@@ -29,11 +29,12 @@ var pagination = function(opts) {
 
         for (var i = 1; i < numPages; i++) {
             var cloneName = baseName + separator + (i+1) + ext;
-            clone = cloneObj(file, true, function (value) {
+            clone = cloneObj(file, false, function (value) {
                 if ( Buffer.isBuffer(value) ) {
                     return value.slice();
                 }
             });
+            clone.pagination = cloneObj(file.pagination, false);
 
             last.pagination.next = clone;
 
